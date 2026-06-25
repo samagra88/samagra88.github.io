@@ -1,0 +1,33 @@
+/* Style for the tab buttons */
+/* Add this at the very top */
+main {
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+/* Style for the tab buttons */
+.tabs { 
+    display: flex; 
+    gap: 10px; 
+    margin-bottom: 20px; 
+    border-bottom: 2px solid #333; /* Adds clean separation */
+    padding-bottom: 10px;
+}
+/* ... rest of your code ... */
+.tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+.tab-link { padding: 10px 20px; cursor: pointer; border: none; background: #ddd; }
+.tab-link.active { background: #333; color: #fff; }
+
+/* Hide inactive tabs */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+.tech-details ul { list-style-type: square; line-height: 1.6; }
+table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+table, th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }

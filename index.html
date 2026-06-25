@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | AI SEO & Organic Growth</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Portfolio</h1>
+    </header>
+   <main>
+    <div class="tabs">
+        <button class="tab-link active" onclick="openTab(event, 'Architecture')">Architecture</button>
+        <button class="tab-link" onclick="openTab(event, 'Trade-offs')">Trade-offs</button>
+        <button class="tab-link" onclick="openTab(event, 'Cost')">Cost Analysis</button>
+        <button class="tab-link" onclick="openTab(event, 'Failures')">Failures</button>
+    </div>
+        <h2>Architecture</h2>
+        <p style="font-size: 0.9em; color: #555; margin-bottom: 10px;">
+        <em>Interactive Case Study: </em>
+        <a href="https://github.com/samagra88/email-automation-agent-1" target="_blank" style="text-decoration: underline; color: #007bff;">
+            View implementation source code on GitHub
+        </a>
+        </p>
+   <div id="info-panel" style="margin-top: 20px; padding: 15px; border: 1px solid #ddd; background: #fdfdfd; min-height: 20px;">
+        <em>Click on any step in the diagram to see technical details...</em>
+    </div>
+        <pre class="mermaid">
+        graph TD
+    %% Define Nodes with Click Events
+    User((User Email)) --> Gmail[Gmail API]
+    Gmail --> Supabase[(Supabase DB)]
+    Supabase --> Router{LLM Router}
+    
+    %% Routing logic
+    Router --> Gemini[Gemini 1.5]
+    Router --> Claude[Claude 3.5]
+    Router --> Groq[Groq Llama 3]
+    
+    Gemini --> Validator[Pydantic Validator]
+    Claude --> Validator
+    Groq --> Validator
+    
+    Validator --> Drafter[Drafting Agent]
+    Drafter --> CrewAI[CrewAI Orchestration]
+
+    %% Apply Click Events to specific nodes
+    click Router call showDetails("Router") "View Router Logic"
+    click Validator call showDetails("Validator") "View Validator Logic"
+    click Drafter call showDetails("Drafter") "View Drafter Logic"
+        </pre>
+    </div>
+
+    <div id="Trade-offs" class="tab-content">
+        <h2>Trade-offs</h2>
+        <p>Discussion on the trade-offs made in the architecture...</p>
+        <h3>Core Components & Reasoning</h3>
+        <ul>
+            <li><strong>LLM Router:</strong> The entry point. <em>Reasoning:</em> Abstracting the provider allows for seamless switching without impacting the core business logic.</li>
+            <li><strong>Pydantic Validator:</strong> Used to enforce output structure. <em>Benefit:</em> Ensures downstream tools receive clean, typed data, reducing runtime crashes.</li>
+            <li><strong>CrewAI Orchestration:</strong> Orchestrates the "Validator" and "Drafter" agents. <em>Trade-off:</em> Increased latency vs. higher quality control.</li>
+        </ul>
+        <h3>Skills Demonstrated</h3>
+        <ul>
+            <li>✅ LLM API Integration (Gemini, Claude, Groq)</li>
+            <li>✅ Graceful Fallback Design (error handling)</li>
+            <li>✅ Cost Optimization (Groq free-tier strategy)</li>
+            <li>✅ Latency & Rate Limit Strategy</li>
+       </ul>
+    </div>
+
+    <div id="Cost" class="tab-content">
+        <h2>Cost Analysis</h2>
+        <p>Breakdown of expenses and RLS policy efficiency...</p>
+    <table>
+        <tr><th>Model</th><th>Cost/1K</th><th>Speed</th><th>Reliability</th></tr>
+        <tr><td>Gemini Flash</td><td>Free</td><td>Fast</td><td>⚠️ Low</td></tr>
+        <tr><td>Claude Haiku</td><td>$0.15</td><td>Med</td><td>✅ High</td></tr>
+        <tr><td>Groq Llama</td><td>Free</td><td>Ultra-Fast</td><td>✅ High</td></tr>
+    </table>
+    <p><em>Insight:</em> Groq provides the best balance of speed and cost, making it the primary choice for high-volume processing.</p>
+
+    </div>
+
+    <div id="Failures" class="tab-content">
+        <h2>Failure Scenarios</h2>
+        <p>Handling strategies for LLM timeouts and errors...</p>
+    <ul>
+        <li><strong>Gemini Rate Limit (429):</strong> The router detected the limit at 10 AM, immediately switched to Claude, resulting in zero user-facing downtime.</li>
+        <li><strong>Claude Credit Depletion:</strong> When $5 free credits were exhausted, the system automatically routed to the Groq free tier, keeping the process live.</li>
+        <li><strong>Groq Model Deprecation:</strong> After a model was deprecated mid-project, I tested and migrated to <em>llama-3.1-8b-instant</em>, demonstrating the value of abstracting LLM calls.</li>
+    </ul>
+    </div>
+    </main>
+
+
+    <!-- Link to your JS file -->
+    <script src="js/script.js"></script>
+
+<hr style="margin: 40px 0; border: 0; border-top: 1px solid #ccc;">
+<footer>
+    <p>This project demonstrates production-grade LLM engineering: not just 'using models,' but architecting systems that survive API failures, optimize costs, and leverage emerging tech. In 2026, understanding model economics and fallback patterns is essential for scalable AI infrastructure.</p>
+</footer>
+<script>
+    mermaid.initialize({
+        securityLevel: 'loose' // This allows the callback to trigger
+    });
+</script>
+</body>
+</html>
